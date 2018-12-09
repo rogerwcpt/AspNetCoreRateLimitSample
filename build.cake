@@ -33,7 +33,7 @@ Task("Default")
         {
             Headers = new Dictionary<string, string>
             {
-                { "Code", "72F050D5-392C-41D7-891E-245723EBFCE5" },
+                { "Code", "GlobalCode" },
             },
             EnsureSuccessStatusCode = true
         };
@@ -43,14 +43,7 @@ Task("Default")
             var sw = new System.Diagnostics.Stopwatch();
             sw.Start();
             string responseBody =  HttpGet(URL, settings);
-            var success = responseBody.StartsWith("Work");
-            string result = success ? "Success" : "Err";
-            sw.Stop();
-            Information(result + " --- Time Taken (s):  " + sw.Elapsed.TotalSeconds);
-            if (result == "Err")
-            {
-               Error(responseBody);
-            }
+            Information("Success: " + responseBody);
          }
          catch (AggregateException exp)
          {
